@@ -9,6 +9,21 @@ https://t.me/aachen_termin
 
 This channel is exclusively for students of RWTH Aachen University who are applying for visa extensions. Instant notifications will be sent to the channel once appointment slots become available.
 
+## Aachen Hbf Termin
+https://t.me/hbf_termin
+
+This channel is for those who need the services of the Ausländeramt at HBF.
+
+## FH Aachen Termin
+https://t.me/+sCtrviN5NNw2YzBi
+
+This channel is exclusively for students of FH Aachen who are applying for visa extensions.
+
+## Abholung Aufenthaltserlaubnis Termin
+https://t.me/+1EGm6-NDQGM2ODAy
+
+This channel is for Abholung Aufenthaltserlaubnis.
+
 ## Aachen Wohnsitz an-/ ab-/ ummelden Termin
 Every month has its own channel. Join the respective channels below to receive instant notifications when appointment slots become available at Bürgerservice Bahnhofplatz or Bürgerservice Katschhof.
 
@@ -45,5 +60,6 @@ Every month has its own channel. Join the respective channels below to receive i
   - Termin in December: [https://t.me/+L6l4eytXD9cyZGNi](https://t.me/+L6l4eytXD9cyZGNi)
 
 ## Donate
-If you find this project helpful, consider buying me a coffee ☕️    
+If you find this project helpful, consider buying me a coffee ☕️ Your support is greatly appreciated!  
+Special thanks to all the amazing donors who have contributed to the project ❤️.
 [paypal.me/liaoyanying](https://www.paypal.me/liaoyanying)
