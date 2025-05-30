@@ -1,7 +1,10 @@
 from termin import aachen_hbf_termin, superc_termin
-import os
 import datetime
 import subprocess as sb
+import platform # Added for OS detection
+import webbrowser # Added for opening web pages
+import pyttsx3 # Added for text-to-speech
+import os
 audio = "/home/karnada/Downloads/Trash/mixkit-slot-machine-payout-alarm-1996.wav"
 website = "https://termine.staedteregion-aachen.de/auslaenderamt/select2?md=1"
 say = "new appointment avaialable."*5
@@ -19,13 +22,21 @@ def extract_date_from_string(res_string: str) -> datetime.datetime:
     date_str = date_line.split(',')[1].strip()
     return datetime.datetime.strptime(date_str, '%d.%m.%Y')
 
+# def trigger_alarm():
+#     # Play an alarm sound
+#     engine = pyttsx3.init()
+#     engine.say(say)
+#     engine.runAndWait()
+#     webbrowser.open(website) # Use webbrowser to open the website
+
+
 def trigger_alarm():
     # Play an alarm sound
     # os.system(f"xdg-open {audio}")
     sb.run(["spd-say", say])
     os.system(f"xdg-open {website}")
 
-# trigger_alarm()
+trigger_alarm()
 while True:
     # Check for appointments in hbf
     # for team in ['Team 1', 'Team 2', 'Team 3']:
