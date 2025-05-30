@@ -6,11 +6,12 @@ on:
     - cron: "*/5 * * * *"
     # Triggers the workflow every hour
     - cron: "0 * * * *"
+  workflow_dispatch:
 
 jobs:
   ping:
     runs-on: ubuntu-latest
-    if: github.event.schedule == '*/5 * * * *'
+    if: github.event.schedule == '*/5 * * * *' || github.event_name == 'workflow_dispatch'
     steps:
       - name: checkout repo content
         uses: actions/checkout@v4 # checkout the repository content
@@ -24,17 +25,27 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+      
+      - name: Install Playwright dependencies
+        run: |
+          pip install playwright
+          playwright install
 
       - name: execute py script # run ping.py
         run: python ping.py
+      
+      - name: execute an3.py
+        env:
+          TG_TOKEN: ${{ secrets.TG_TOKEN }}
+        run: python an3.py
 
   restart-service:
     runs-on: ubuntu-latest
-    if: github.event.schedule == '0 * * * *'
+    if: github.event.schedule == '0 * * * *' || github.event_name == 'workflow_dispatch'
     steps:
       - name: Restart Render Service
         env:
-          RENDER_API_TOKEN: ${{ secrets.RENDER_API_TOKEN }}
+          RENDER_API_TOKEN: ${{ secrets.RENDER_API_TOKEN }}          
         run: |
           curl --request POST \
                --url https://api.render.com/v1/services/srv-chglpirhp8u065oa4gf0/restart \
