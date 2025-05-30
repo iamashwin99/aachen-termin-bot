@@ -5,6 +5,19 @@ import subprocess as sb
 audio = "/home/karnada/Downloads/Trash/mixkit-slot-machine-payout-alarm-1996.wav"
 website = "https://termine.staedteregion-aachen.de/auslaenderamt/select2?md=1"
 say = "new appointment avaialable."*5
+date_already_booked = datetime.datetime(2026, 8, 26)
+min_date = datetime.datetime(2025, 8, 1)
+
+
+def extract_date_from_string(res_string: str) -> datetime.datetime:
+    """Extracts the date from the appointment availability string."""
+    # The res is of the format:
+    # Service Name:
+    # Day, DD.MM.YYYY
+    # We need to extract the date from the string which is the 2nd line
+    date_line = res_string.split('\n')[1]
+    date_str = date_line.split(',')[1].strip()
+    return datetime.datetime.strptime(date_str, '%d.%m.%Y')
 
 def trigger_alarm():
     # Play an alarm sound
@@ -22,20 +35,10 @@ while True:
     #         # make an alarm sound
     #         print("Alarm!")
     #         print(res)
-    #         # The res is of the format:
-    #         # New appointments are available now at HBF Team 3!
-    #         # Mittwoch, 25.09.2024
-    #         # We need to extract the date and time from the string which is the 2nd line
-    #         res = res.split('\n')[1]
-    #         date_available = res.split(',')[1].strip()
-    #         date_available = datetime.datetime.strptime(date_available, '%d.%m.%Y')
+    #         date_available = extract_date_from_string(res)
     #         # check that the date is earlier than 25.09.2024
-    #         date_already_booked = datetime.datetime(2024, 8, 26)
-    #         if date_available < date_already_booked:
-    #             #os.system(f"xdg-open {audio}")
-    #             #os.system(f"spd-say {say}")
-    #             os.system(f"xdg-open {website}")
-    #             sb.run(["spd-say", say])
+    #         if date_available > min_date and date_available < date_already_booked:
+    #             trigger_alarm()
     #             exit(0)
 
     # Check for appointments in SuperC
@@ -43,4 +46,7 @@ while True:
     if is_available:
         print("Alarm!")
         print(res)
-        trigger_alarm()
+        date_available = extract_date_from_string(res)
+        if date_available > min_date and date_available < date_already_booked:
+            trigger_alarm()
+            exit(0)
